@@ -1,0 +1,1 @@
+ a automation script to log into Orange HRM using pure playwright.

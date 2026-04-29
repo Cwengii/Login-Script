@@ -5,6 +5,13 @@ def navigate_to_pim(page):
     page.wait_for_url("**/pim/**", timeout=10000)
 
 def select_first_employee(page):
-    page.wait_for_selector(".oxd-table-row", timeout=10000)
-    page.locator(".oxd-table-row a").first.click()
-    time.sleep(2)
+    try:
+        page.wait_for_selector(".oxd-table-row", timeout=15000)
+        employee_links = page.locator(".oxd-table-row a")
+        if employee_links.count() > 0:
+            employee_links.first.click()
+            time.sleep(2)
+            return True
+        return False
+    except Exception:
+        return False

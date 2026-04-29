@@ -1,122 +1,102 @@
-## The Files
+# Login Automation Project
 
-1. **login.feature** - Tests written in English
-2. **login_steps.py** - Python code that does the actual testing  
-3. **environment.py** - Sets up the browser before each test
+The automation covers:
+1. Opening a browser  
+2. Navigating to the OrangeHRM login page  
+3. Entering a username and password  
+4. Clicking the login button  
+5. Checking whether the login succeeded or failed  
+6. Apply for leave  
 
-## How to Use
+## Project Layout
 
-1. Install packages:
+```
+Login-Script/
+├── main.py                    # Runs the automation
+├── login.py                   # Login functions (browser setup, login)
+├── pim.py                     # Employee management functions
+├── leave.py                   # Leave application functions
+├── features/                  # Behave test files
+│   ├── login.feature          #  Test scenarios
+│   ├── steps/
+│   │   └── login_steps.py     # Behave steps
+│   └── environment.py         # Browser setup for Behave
+├── requirements.txt           # Required Python packages
+├── setup.bat                  # Setup script
+└── README.md                  # This file
+```
+
+## Quick Start
+
+### Step 1: Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Run tests:
+### Step 2: How to Run
+
+#### Runs the full automation: login → PIM → leave application.  
 ```bash
-behave
+python main.py
 ```
 
-That's it! It opens Chrome and tests the login page.
-
-## Common Commands
-
+#### Runs the English-style test scenarios  
 ```bash
-behave                    # Run all tests
-behave -v                 # Show more details
-behave features/login.feature   # Run just login tests
+python -m behave
 ```
 
-## How It Works
+### Modular Scripts (main.py, login.py, etc.)
 
-1. Feature file says what to test (in English)
-2. login_steps.py has Python code for each step
-3. environment.py opens/closes the browser
-4. Tests run automatically
+- **What it is:** Python code split into small, reusable functions.  
 
-## Project Structure
+**Example:**
+```python
+# In main.py
+from login import perform_login
+from pim import navigate_to_pim
 
-```
-features/
-├── login.feature              # Test scenarios in English
-├── steps/
-│   └── login_steps.py        # Python implementation of steps
-└── environment.py            # Setup/teardown configuration
-
-requirements.txt              # Python packages to install
-README.md            # This file!
+def main():
+    # Setup browser
+    # perform_login(page)
+    # navigate_to_pim(page)
+    # ... 
 ```
 
-### Feature File (login.feature)
+### Behave folder
 
+- **What it is:** Tests written in plain English, connected to Python code.  
+
+**Example:**
 ```gherkin
-Feature: User Login
-  Background:
-    Given the login page is open
-    
-  Scenario: Successful login with valid credentials
-    When I enter username "testuser"
-    And I enter password "password123"
-    And I click the login button
-    Then I should see the dashboard
+Scenario: Successful login
+  When I enter username "admin"
+  And I enter password "admin123"
+  Then I should see the dashboard
 ```
-
-**Reading this:**
-1. **Feature**: Describes what we're testing (User Login)
-2. **Background**: Steps that run before every scenario
-3. **Scenario**: A specific test case
-4. **When/And/Then**: Individual steps
-
-### Step Definition File (login_steps.py)
-
-Each line in the feature file is matched to a Python function:
 
 ```python
 @when('I enter username "{username}"')
 def step_enter_username(context, username):
-    # Find the username field and type the value
-    username_field = context.wait.until(
-        EC.presence_of_element_located((By.NAME, "username"))
-    )
-    username_field.send_keys(username)
+    # Python code to type in username field
 ```
 
-**The `@when` decorator** matches the step in the feature file.
-The function name doesn't matter - only the text in quotes matters!
+## Common Commands
 
-## How Tests Work
-
-1. **Browser Setup** (environment.py: `before_scenario`)
-   - Opens Chrome browser
-   - Maximizes window
-   - Sets up waits
-
-2. **Run Scenario Steps**
-   - Execute `Given` steps (setup)
-   - Execute `When` steps (actions)
-   - Execute `Then` steps (assertions)
-   - Print progress with ✓ or ✗
-
-3. **Browser Cleanup** (environment.py: `after_scenario`)
-   - Closes browser
-   - Saves screenshots on failure
-   - Prints results
-
-## Debugging
-
-### Common Issues:
-
-**Error: "webdriver not found"**
+### Modular Scripts
 ```bash
-pip install webdriver-manager
+python main.py
 ```
 
-**Error: "NoSuchElementException"**
-- The element selector is wrong
-- The page hasn't loaded yet
-- The element ID/NAME changed
+### Behave Tests
+```bash
+python -m behave
+python -m behave -v
+python -m behave features/login.feature
+```
 
-**To Debug:**
-1. Run with verbose mode: `behave -v`
-2. Add print statements in your step definitions
-3. Take screenshots on failure (automatically done)
-4. Check the element IDs in the browser (F12)
+## Troubleshooting
+
+- **"Module not found" errors:**  
+  ```bash
+  pip install -r requirements.txt
+  ```

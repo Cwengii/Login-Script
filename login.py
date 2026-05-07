@@ -1,5 +1,3 @@
-from playwright.sync_api import sync_playwright
-import time
 import time_conts as t
 
 # Navigates to the login portal then fills in the deatils 
@@ -8,4 +6,4 @@ def perform_login(page):
     page.fill("input[name=username]", "Admin")
     page.fill("input[name=password]", "admin123")
     page.click("button[type=submit]")
-    page.wait_for_url("**/dashboard**", t.request_timeout)
+    page.wait_for_url("**/dashboard**",timeout=  t.request_timeout)

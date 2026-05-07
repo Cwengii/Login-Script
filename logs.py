@@ -1,6 +1,6 @@
 import logging
 
-# Set up a logger that writes to both a file and the terminal (console)
+# Logger that writes to both a file and the terminal (console)
 logger = logging.getLogger("hrm_automation")
 logger.setLevel(logging.DEBUG)
 

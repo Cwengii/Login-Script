@@ -1,2 +1,14 @@
 2026-05-07 14:33:37,692 - INFO - Browser launched and script started
 2026-05-07 14:35:21,695 - INFO - Browser launched and script started
+2026-05-07 14:40:54,462 - INFO - Browser launched and script started
+2026-05-07 14:41:03,689 - INFO - User has logged in successfully
+2026-05-07 14:41:05,440 - INFO - Navigated to the PIM section
+2026-05-07 14:41:35,470 - ERROR - An error occurred: Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".oxd-table-row a").first
+    - waiting for" https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveList" navigation to finish...
+    - navigated to "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveList"
+    - waiting for" https://opensource-demo.orangehrmlive.com/web/index.php/leave/applyLeave" navigation to finish...
+    - navigated to "https://opensource-demo.orangehrmlive.com/web/index.php/leave/applyLeave"
+
+2026-05-07 14:41:36,340 - INFO - Browser closed successfully
